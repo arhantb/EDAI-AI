@@ -52,9 +52,9 @@ if st.button("Submit Query") and query:
             result = response.json()
 
             if "error" in result:
-                st.error("❌ Error: " + result["error"])
+                st.error(" Error: " + result["error"])
             else:
-                st.success(" AI Answer:")
+                st.success(" Indexing based Answer:")
                 st.markdown(f"**Q:** {result.get('query')}")
 
                 # JSON answer
@@ -67,7 +67,7 @@ if st.button("Submit Query") and query:
                     st.code(response_text, language="json")
 
                 # Clauses
-                st.markdown("### 🔎 Referenced Clauses:")
+                st.markdown("###  Referenced Clauses:")
                 for i, clause in enumerate(result.get("retrieved_clauses", [])):
                     st.markdown(f"**Clause {i+1}:**")
                     st.code(clause, language="text")
