@@ -21,7 +21,7 @@
 Document-AI is an intelligent, session-based insurance assistant that combines semantic document retrieval using FAISS with reasoning powered by Gemini 1.5 Flash. Users can upload multiple policy documents, ask natural language questions, and receive structured, justified decisions in real time.
 </p>
 
-## 🚀 Features
+##  Features
 
 - **Multi-Document Upload**: Support for PDF and DOCX insurance policy documents
 - **Session-Based Processing**: Each upload session is isolated for clean context separation
@@ -32,7 +32,7 @@ Document-AI is an intelligent, session-based insurance assistant that combines s
 - **Web Interface**: Streamlit-based user interface for easy interaction
 - **REST API**: FastAPI backend for programmatic access
 
-## 📋 Table of Contents
+##  Table of Contents
 
 - [About](#about)
 - [Architecture](#architecture)
@@ -44,7 +44,7 @@ Document-AI is an intelligent, session-based insurance assistant that combines s
 - [Dependencies](#dependencies)
 - [Contributing](#contributing)
 
-## 🧐 About
+##  About
 
 Document-AI is designed to streamline insurance policy analysis by providing instant, accurate answers to complex policy questions. The system processes uploaded documents through advanced NLP techniques, creates semantic embeddings, and uses AI reasoning to evaluate claims and provide structured decisions.
 
@@ -55,7 +55,7 @@ Key capabilities:
 - **AI Reasoning**: Step-by-step analysis using Gemini 1.5 Flash
 - **Session Management**: Clean separation between different document sets
 
-## 🏗️ Architecture
+##  Architecture
 
 The system follows a modular architecture with clear separation of concerns:
 
@@ -78,7 +78,7 @@ Document-AI/
 - **Embedder**: Generates text embeddings using sentence transformers
 - **Ingestion**: Processes and chunks uploaded documents
 
-## 🏁 Installation
+##  Installation
 
 ### Prerequisites
 
@@ -114,7 +114,7 @@ Document-AI/
    gemini_api_key: "your_gemini_api_key_here"
    ```
 
-## 🎯 Usage
+##  Usage
 
 ### Web Interface (Recommended)
 
@@ -201,7 +201,7 @@ The system configuration is managed through `config/config.yaml`:
 gemini_api_key: "your_gemini_api_key_here"
 ```
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 DOCUMENT-AI.v01/
@@ -237,7 +237,7 @@ DOCUMENT-AI.v01/
 └── VeriSureAI.svg              # Project logo
 ```
 
-## 📦 Dependencies
+##  Dependencies
 
 ### Core Dependencies
 - **FastAPI** (≥0.116.1) - Modern web framework for building APIs
@@ -261,7 +261,7 @@ DOCUMENT-AI.v01/
 - **Pydantic** (≥2.11.7) - Data validation
 - **Tiktoken** (≥0.9.0) - Token counting
 
-## 🚀 Deployment
+##  Deployment
 
 ### Local Development
 ```bash
@@ -279,7 +279,7 @@ cd ui && streamlit run app.py
 4. Use a production ASGI server like Gunicorn
 5. Set up reverse proxy (nginx/Apache)
 
-## 🧪 Testing
+##  Testing
 
 Run the testing scripts to verify system functionality:
 
@@ -290,7 +290,7 @@ python ingestion_testing.py
 python index_build.py
 ```
 
-## 🤝 Contributing
+##Contributing
 
 1. Fork the repository
 2. Create a feature branch
@@ -298,18 +298,14 @@ python index_build.py
 4. Add tests if applicable
 5. Submit a pull request
 
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **Google Gemini** for providing the AI reasoning capabilities
 - **FAISS** for efficient vector similarity search
 - **FastAPI** and **Streamlit** for the robust web framework
 - **Sentence Transformers** for high-quality text embeddings
 
-## 📞 Support
+## Support
 
 For questions and support, please open an issue in the repository or contact the development team.
 
