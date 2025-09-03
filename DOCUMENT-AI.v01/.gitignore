@@ -11,3 +11,9 @@ wheels/
 config/
 ui/app.txt
 data/docs/
+
+# Ignore Python virtual environment
+venv/
+.venv/
+__pycache__/
+*.pyc
