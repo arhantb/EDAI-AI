@@ -1,10 +1,10 @@
 # Document-AI v0.1
 
 <p align="center">
-  <img width=200px height=200px src="VeriSureAI.svg" alt="Document-AI Logo">
+  <img width=200px height=200px src="EDAI.png" alt="Document-AI Logo">
 </p>
 
-<h3 align="center">Intelligent Insurance Policy Analysis Assistant</h3>
+<h3 align="center">Insurance Policy Assistant v0.1</h3>
 
 <div align="center">
 
