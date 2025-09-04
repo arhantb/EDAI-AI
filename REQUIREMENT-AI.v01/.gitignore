@@ -1,0 +1,44 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+config/
+ui/app.txt
+data/docs/
+
+# Ignore Python virtual environment
+venv/
+.venv/
+__pycache__/
+*.pyc
+# Additional environments and OS files
+.venv311/
+.env
+.env.*
+.DS_Store
+Thumbs.db
+
+# Outputs and runtime artifacts
+out/
+logs/
+*.log
+
+# Indexes and cache files
+data/index/
+**/backup/
+*.pkl
+*.idx
+*.index
+faiss.index
+
+# Temporary uploads and generated assets
+temp_uploads/
+ui/__pycache__/
+app/__pycache__/
+scripts/__pycache__/
