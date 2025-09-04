@@ -404,7 +404,5 @@ See `config/config.yaml` for:
 - Keep regulated data in your environment. Avoid sending sensitive content to external LLMs by setting `LLM_PROVIDER=none` or hosting a local model.
 - PII handling is your responsibility; enable redaction if required before indexing.
 
-### License
-Apache-2.0
 
 
