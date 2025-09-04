@@ -313,7 +313,7 @@ For questions and support, please open an issue in the repository or contact the
 
 ### Development Team
 - [![LinkedIn](https://img.shields.io/badge/Arhant%20Bagde-LinkedIn-blue?logo=linkedin)](https://www.linkedin.com/in/arhant-bagde-8ab5111a0/)
-- [![LinkedIn](https://img.shields.io/badge/Member%202-LinkedIn-blue?logo=linkedin)](https://www.linkedin.com/in/member2/)
+- [![LinkedIn](https://img.shields.io/badge/Aditya%20Bhagat-LinkedIn-blue?logo=linkedin)](https://www.linkedin.com/in/aditya-bhagat-13b3a2307/)
 - [![LinkedIn](https://img.shields.io/badge/Member%203-LinkedIn-blue?logo=linkedin)](https://www.linkedin.com/in/member3/)
 - [![LinkedIn](https://img.shields.io/badge/Member%204-LinkedIn-blue?logo=linkedin)](https://www.linkedin.com/in/member4/)
 - [![LinkedIn](https://img.shields.io/badge/Member%205-LinkedIn-blue?logo=linkedin)](https://www.linkedin.com/in/member5/)
