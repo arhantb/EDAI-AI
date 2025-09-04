@@ -307,14 +307,16 @@ python index_build.py
 
 ## Support
 
-For questions and support, please open an issue in the repository or contact the development team-:
+## Support
+
+For questions and support, please open an issue in the repository or contact the development team:
+
 ### Development Team
-- [![LinkedIn](https://img.shields.io/badge/ARHANT_BAGDE-LinkedIn-blue?style=flat&logo=linkedin)](www.linkedin.com/in/arhant-bagde-8ab5111a0)
-- [![LinkedIn](https://img.shields.io/badge/Name2-LinkedIn-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/username2/)
-- [![LinkedIn](https://img.shields.io/badge/Name3-LinkedIn-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/username3/)
+- [![LinkedIn](https://img.shields.io/badge/Arhant%20Bagde-LinkedIn-blue?logo=linkedin)](https://www.linkedin.com/in/arhant-bagde-8ab5111a0/)
+- [![LinkedIn](https://img.shields.io/badge/Member%202-LinkedIn-blue?logo=linkedin)](https://www.linkedin.com/in/member2/)
+- [![LinkedIn](https://img.shields.io/badge/Member%203-LinkedIn-blue?logo=linkedin)](https://www.linkedin.com/in/member3/)
+- [![LinkedIn](https://img.shields.io/badge/Member%204-LinkedIn-blue?logo=linkedin)](https://www.linkedin.com/in/member4/)
+- [![LinkedIn](https://img.shields.io/badge/Member%205-LinkedIn-blue?logo=linkedin)](https://www.linkedin.com/in/member5/)
 
-
-
----
 
 **Document-AI v0.1** - Making insurance policy analysis intelligent and accessible.
