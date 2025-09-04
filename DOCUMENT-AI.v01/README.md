@@ -307,8 +307,6 @@ python index_build.py
 
 ## Support
 
-## Support
-
 For questions and support, please open an issue in the repository or contact the development team:
 
 ### Development Team
