@@ -290,7 +290,7 @@ python ingestion_testing.py
 python index_build.py
 ```
 
-##Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch
@@ -309,7 +309,7 @@ python index_build.py
 
 For questions and support, please open an issue in the repository or contact the development team-:
 ### Development Team
-- [![LinkedIn](https://img.shields.io/badge/Name1-LinkedIn-blue?style=flat&logo=linkedin)](www.linkedin.com/in/arhant-bagde-8ab5111a0)
+- [![LinkedIn](https://img.shields.io/badge/ARHANT_BAGDE-LinkedIn-blue?style=flat&logo=linkedin)](www.linkedin.com/in/arhant-bagde-8ab5111a0)
 - [![LinkedIn](https://img.shields.io/badge/Name2-LinkedIn-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/username2/)
 - [![LinkedIn](https://img.shields.io/badge/Name3-LinkedIn-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/username3/)
 
