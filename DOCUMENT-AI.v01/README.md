@@ -127,7 +127,7 @@ Document-AI/
 2. **Launch the Streamlit interface**
    ```bash
    cd ui
-   streamlit run app.py
+   streamlit run ui\app.py
    ```
 
 3. **Upload documents and ask questions**

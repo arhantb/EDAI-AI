@@ -1,12 +1,13 @@
 from pathlib import Path
 from typing import List, Dict, Tuple
 
-import faiss
 import numpy as np
 
 
 class FaissRetriever:
     def __init__(self, dim: int, index_path: str | Path | None = None):
+        # Lazy import FAISS to avoid heavy global import
+        import faiss  # type: ignore
         self.dim = dim
         self.index = faiss.IndexFlatIP(dim)
         self.docs: List[Dict] = []

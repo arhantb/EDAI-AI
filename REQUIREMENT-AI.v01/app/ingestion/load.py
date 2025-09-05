@@ -6,8 +6,13 @@ from pdf2image import convert_from_path
 import pytesseract
 from PIL import Image
 
+try:
+    import docx  # python-docx
+except Exception:
+    docx = None
 
-def list_input_files(input_dir: str | Path, exts: Iterable[str] = (".pdf", ".txt", ".png", ".jpg", ".jpeg")) -> List[Path]:
+
+def list_input_files(input_dir: str | Path, exts: Iterable[str] = (".pdf", ".txt", ".png", ".jpg", ".jpeg", ".docx")) -> List[Path]:
     base = Path(input_dir)
     files: List[Path] = []
     for ext in exts:
@@ -38,6 +43,27 @@ def ocr_image(path: Path) -> str:
     return pytesseract.image_to_string(img)
 
 
+def read_docx(path: Path) -> str:
+    if docx is None:
+        return ""
+    try:
+        d = docx.Document(str(path))
+        lines: List[str] = []
+        for p in d.paragraphs:
+            if p.text and p.text.strip():
+                lines.append(p.text)
+        # Include table text if present
+        for table in getattr(d, "tables", []) or []:
+            for row in table.rows:
+                cells = [c.text.strip() for c in row.cells]
+                line = " ".join([c for c in cells if c])
+                if line:
+                    lines.append(line)
+        return "\n".join(lines)
+    except Exception:
+        return ""
+
+
 def load_and_normalize(path: Path) -> Dict:
     ext = path.suffix.lower()
     if ext == ".txt":
@@ -46,6 +72,8 @@ def load_and_normalize(path: Path) -> Dict:
         text = extract_text_from_pdf(path)
     elif ext in {".png", ".jpg", ".jpeg"}:
         text = ocr_image(path)
+    elif ext == ".docx":
+        text = read_docx(path)
     else:
         text = ""
     return {"source": str(path), "text": text}

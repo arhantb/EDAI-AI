@@ -1,0 +1,5 @@
+As a user, I want (a) The requirements should be accurate, clear, complete, verifiable, consistent, understandable so that value is delivered.
+As a user, I want architecture, technical infrastructure, etc.) should be avoided. Such solutions are proposed so that value is delivered.
+As a user, I want (c) Acceptance criteria define the boundaries for the functional requirements and they should be so that value is delivered.
+As a user, I want in the SA&D stage. Requirements should be written in layman’s terms which are called so that value is delivered.
+As a user, I want These objectives should align with those stated in the Business Case Document.> so that value is delivered.

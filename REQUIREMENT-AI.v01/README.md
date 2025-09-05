@@ -93,28 +93,19 @@ REQUIREMENT-AI.v01/
 
 ### Setup
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd REQUIREMENT-AI.v01
-   ```
 
-2. **Create and activate virtual environment**
+1. **Create and activate virtual environment**
    ```bash
    python -m venv .venv
    # On Windows
    .venv\Scripts\activate
-   # On Unix/MacOS
-   source .venv/bin/activate
-   ```
-
-3. **Install dependencies**
+  
+2. **Install dependencies**
    ```bash
    pip install --upgrade pip setuptools wheel
    pip install -r requirements.txt
    ```
-
-4. **Configure environment (optional)**
+3. **Configure environment (optional)**
    - If using hosted LLMs, set provider keys (e.g., `OPENAI_API_KEY`).
    - Configure `config/config.yaml` for embeddings, chunking, retrieval, and outputs.
 
@@ -384,6 +375,8 @@ python -m app.main --input data/docs --out out/ --moscow --stories
 7) Launch the Streamlit UI:
 ```powershell
 streamlit run ui/app.py
+streamlit run ui/ui_app.py
+
 ```
 
 ### Configuration
