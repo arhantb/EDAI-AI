@@ -17,8 +17,15 @@ if str(ROOT) not in sys.path:
 from app.core.engine import PipelineEngine
 
 
-st.set_page_config(page_title="Requirement-AI", layout="wide")
-st.title("Requirement-AI: Automated Requirements Authoring")
+st.set_page_config(
+    page_title="Requirement-AI v0.1", 
+    layout="wide",
+    initial_sidebar_state="expanded",
+    page_icon="📋"
+)
+
+st.title("📋 Requirement-AI: Automated Requirements Authoring")
+st.markdown("**Transform documents into structured, prioritized requirements with AI-powered analysis**")
 
 with st.sidebar:
     st.header("Settings")
@@ -278,5 +285,218 @@ if excel_path.exists():
     st.download_button("Download Excel", data=excel_path.read_bytes(), file_name=excel_path.name, key="local_download_excel")
 if stories_path.exists():
     st.download_button("Download User Stories", data=stories_path.read_bytes(), file_name=stories_path.name, key="local_download_stories")
+
+# New unique features section
+st.divider()
+st.header("🚀 Advanced Features")
+
+# Create tabs for new features
+tab1, tab2, tab3, tab4 = st.tabs(["📊 Analytics", "✅ Quick Validator", "📝 Template Builder", "🎯 Priority Assistant"])
+
+with tab1:
+    st.subheader("📊 Requirements Analytics")
+    if st.button("Get Analytics Summary", key="analytics_btn"):
+        if mode == "API (upload to backend)" and api_url:
+            try:
+                resp = requests.get(f"{api_url}/analytics/summary", timeout=30)
+                if resp.status_code == 200:
+                    analytics = resp.json()
+                    col1, col2, col3, col4 = st.columns(4)
+                    with col1:
+                        st.metric("Total Sessions", analytics.get("total_sessions", 0))
+                    with col2:
+                        st.metric("Avg Processing Time", analytics.get("avg_processing_time", "N/A"))
+                    with col3:
+                        st.metric("Most Common", analytics.get("most_common_requirements", [""])[0][:20] + "...")
+                    with col4:
+                        moscow = analytics.get("moscow_distribution", {})
+                        st.metric("Must Have", moscow.get("must", 0))
+                    
+                    # MoSCoW Distribution Chart
+                    if moscow:
+                        import pandas as pd
+                        import plotly.express as px
+                        df = pd.DataFrame(list(moscow.items()), columns=['Priority', 'Count'])
+                        fig = px.pie(df, values='Count', names='Priority', title='MoSCoW Distribution')
+                        st.plotly_chart(fig, use_container_width=True)
+                else:
+                    st.error(f"Failed to get analytics: {resp.status_code}")
+            except Exception as e:
+                st.error(f"Error: {str(e)}")
+        else:
+            st.info("Analytics available in API mode only")
+
+with tab2:
+    st.subheader("✅ Quick Requirements Validator")
+    st.markdown("Validate requirements text without full processing")
+    
+    requirements_text = st.text_area(
+        "Enter requirements (one per line):",
+        placeholder="The system shall authenticate users\nUsers must be able to reset passwords\n...",
+        height=200
+    )
+    
+    if st.button("Validate Requirements", key="validate_btn"):
+        if requirements_text.strip():
+            if mode == "API (upload to backend)" and api_url:
+                try:
+                    resp = requests.post(f"{api_url}/requirements/validate", 
+                                       json=requirements_text, timeout=30)
+                    if resp.status_code == 200:
+                        result = resp.json()
+                        validated = result.get("validated_requirements", [])
+                        
+                        for i, req in enumerate(validated):
+                            col1, col2 = st.columns([4, 1])
+                            with col1:
+                                if req["valid"]:
+                                    st.success(f"✅ {req['text']}")
+                                else:
+                                    st.error(f"❌ {req['text']}")
+                            with col2:
+                                if req["suggestions"]:
+                                    st.warning("⚠️ Needs improvement")
+                    else:
+                        st.error(f"Validation failed: {resp.status_code}")
+                except Exception as e:
+                    st.error(f"Error: {str(e)}")
+            else:
+                # Local validation
+                lines = requirements_text.split('\n')
+                for line in lines:
+                    if line.strip():
+                        if len(line.strip()) > 10:
+                            st.success(f"✅ {line.strip()}")
+                        else:
+                            st.error(f"❌ {line.strip()} - Too short")
+        else:
+            st.warning("Please enter some requirements to validate")
+
+with tab3:
+    st.subheader("📝 Requirements Template Builder")
+    st.markdown("Get standard requirement document templates and outlines")
+    
+    if st.button("Load Standard Template", key="template_btn"):
+        if mode == "API (upload to backend)" and api_url:
+            try:
+                resp = requests.get(f"{api_url}/templates/outline", timeout=30)
+                if resp.status_code == 200:
+                    template = resp.json()
+                    st.success("📋 Standard Requirements Document Outline")
+                    
+                    sections = template.get("sections", [])
+                    for section in sections:
+                        st.markdown(f"• {section}")
+                    
+                    # Create a downloadable template
+                    template_text = "\n".join([f"{section}\n" + "="*50 + "\n[Content goes here]\n" for section in sections])
+                    st.download_button(
+                        "📥 Download Template",
+                        data=template_text,
+                        file_name="requirements_template.txt",
+                        mime="text/plain"
+                    )
+                else:
+                    st.error(f"Failed to load template: {resp.status_code}")
+            except Exception as e:
+                st.error(f"Error: {str(e)}")
+        else:
+            # Local template
+            st.success("📋 Standard Requirements Document Outline")
+            sections = [
+                "1. INTRODUCTION", "2. PROJECT OVERVIEW", "3. FUNCTIONAL REQUIREMENTS",
+                "4. NON-FUNCTIONAL REQUIREMENTS", "5. SYSTEM ARCHITECTURE", "6. DATA REQUIREMENTS",
+                "7. INTERFACE REQUIREMENTS", "8. SECURITY REQUIREMENTS", "9. PERFORMANCE REQUIREMENTS",
+                "10. TESTING REQUIREMENTS", "11. DEPLOYMENT REQUIREMENTS", "12. MAINTENANCE REQUIREMENTS"
+            ]
+            for section in sections:
+                st.markdown(f"• {section}")
+
+with tab4:
+    st.subheader("🎯 Priority Assistant")
+    st.markdown("Quickly prioritize requirements using MoSCoW method")
+    
+    priority_text = st.text_area(
+        "Enter requirements to prioritize (one per line):",
+        placeholder="User authentication system\nEmail notifications\nDark mode theme\n...",
+        height=200,
+        key="priority_text"
+    )
+    
+    col1, col2 = st.columns([2, 1])
+    with col1:
+        criteria = {
+            "must": st.number_input("Must Have Weight", value=4, min_value=1, max_value=10),
+            "should": st.number_input("Should Have Weight", value=3, min_value=1, max_value=10),
+            "could": st.number_input("Could Have Weight", value=2, min_value=1, max_value=10),
+            "wont": st.number_input("Won't Have Weight", value=1, min_value=1, max_value=10)
+        }
+    
+    if st.button("Prioritize Requirements", key="prioritize_btn"):
+        if priority_text.strip():
+            requirements = [line.strip() for line in priority_text.split('\n') if line.strip()]
+            
+            if mode == "API (upload to backend)" and api_url:
+                try:
+                    resp = requests.post(f"{api_url}/requirements/prioritize", 
+                                       json={"requirements": requirements, "criteria": criteria}, 
+                                       timeout=30)
+                    if resp.status_code == 200:
+                        result = resp.json()
+                        prioritized = result.get("prioritized_requirements", [])
+                        
+                        st.success(f"🎯 Prioritized {len(prioritized)} requirements")
+                        
+                        # Display prioritized requirements
+                        for req in prioritized:
+                            priority_color = {
+                                "must": "🔴", "should": "🟡", "could": "🟢", "wont": "⚪"
+                            }.get(req["priority"], "⚪")
+                            
+                            st.markdown(f"{priority_color} **{req['priority'].upper()}** (Score: {req['score']}) - {req['requirement']}")
+                    else:
+                        st.error(f"Prioritization failed: {resp.status_code}")
+                except Exception as e:
+                    st.error(f"Error: {str(e)}")
+            else:
+                # Local prioritization
+                st.success(f"🎯 Prioritized {len(requirements)} requirements")
+                for i, req in enumerate(requirements):
+                    if "authentication" in req.lower() or "security" in req.lower():
+                        priority = "🔴 MUST"
+                    elif "performance" in req.lower():
+                        priority = "🟡 SHOULD"
+                    elif "nice" in req.lower() or "optional" in req.lower():
+                        priority = "🟢 COULD"
+                    else:
+                        priority = "🟡 SHOULD"
+                    st.markdown(f"{priority} - {req}")
+        else:
+            st.warning("Please enter some requirements to prioritize")
+
+# Performance monitoring section
+st.divider()
+st.header("⚡ Performance Monitor")
+
+if mode == "API (upload to backend)" and api_url:
+    if st.button("Check Backend Health", key="health_btn"):
+        try:
+            resp = requests.get(f"{api_url}/health", timeout=10)
+            if resp.status_code == 200:
+                health = resp.json()
+                st.success("🟢 Backend is healthy")
+                col1, col2, col3 = st.columns(3)
+                with col1:
+                    st.metric("Status", health.get("status", "unknown"))
+                with col2:
+                    st.metric("Cached Engines", health.get("cached_engines", 0))
+                with col3:
+                    st.metric("Response Time", f"{resp.elapsed.total_seconds():.2f}s")
+            else:
+                st.error(f"🔴 Backend unhealthy: {resp.status_code}")
+        except Exception as e:
+            st.error(f"🔴 Backend unreachable: {str(e)}")
+else:
+    st.info("Performance monitoring available in API mode only")
 
 

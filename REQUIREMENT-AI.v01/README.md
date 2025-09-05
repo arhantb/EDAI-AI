@@ -23,6 +23,7 @@ Requirement-AI streamlines requirements engineering by automating extraction, va
 
 ##  Features
 
+### Core Features
 - **Multi-Format Ingestion**: PDFs, TXT, and scanned images via OCR (Tesseract)
 - **RAG Context**: FAISS vector search + context synthesis for requirement candidates
 - **NLP Parsing & Classification**: Clean, normalize, and classify into functional/non-functional
@@ -31,6 +32,15 @@ Requirement-AI streamlines requirements engineering by automating extraction, va
 - **Standardized Outputs**: DOCX requirements, Excel report, and user stories export
 - **Web Interface**: Streamlit UI for easy runs and downloads
 - **REST API**: FastAPI backend for programmatic processing
+
+### 🚀 New Advanced Features
+- **📊 Analytics Dashboard**: Real-time insights into requirement processing
+- **✅ Quick Validator**: Instant validation of requirements text
+- **📝 Template Builder**: Standard requirement document templates
+- **🎯 Priority Assistant**: AI-powered MoSCoW prioritization
+- **⚡ Performance Monitor**: Backend health and performance tracking
+- **🔄 Smart Caching**: Optimized processing with intelligent caching
+- **📈 Visual Analytics**: Interactive charts and metrics
 
 ##  Table of Contents
 
@@ -91,56 +101,113 @@ REQUIREMENT-AI.v01/
 - Tesseract OCR (for images/scanned PDFs) on PATH
 - Virtual environment (recommended)
 
-### Setup
+### Quick Setup (Optimized)
 
+1. **Navigate to project directory**
+   ```powershell
+   cd F:\EDAI-DOC-AI.v.01\REQUIREMENT-AI.v01
+   ```
 
-1. **Create and activate virtual environment**
-   ```bash
-   python -m venv .venv
-   # On Windows
-   .venv\Scripts\activate
-  
-2. **Install dependencies**
-   ```bash
-   pip install --upgrade pip setuptools wheel
+2. **One-click startup (Recommended)**
+   ```powershell
+   .\start_all.ps1
+   ```
+
+3. **Manual setup (if needed)**
+   ```powershell
+   # Create virtual environment
+   python -m venv venv
+   
+   # Activate virtual environment
+   .\venv\Scripts\Activate.ps1
+   
+   # Install dependencies
    pip install -r requirements.txt
    ```
-3. **Configure environment (optional)**
+
+4. **Configure environment (optional)**
    - If using hosted LLMs, set provider keys (e.g., `OPENAI_API_KEY`).
    - Configure `config/config.yaml` for embeddings, chunking, retrieval, and outputs.
 
+### Performance Optimizations
+
+- **Lazy Loading**: Models are loaded only when needed
+- **Engine Caching**: Pipeline engines cached for faster subsequent runs
+- **Smart Memory Management**: Efficient resource utilization
+- **Concurrent Processing**: Async file uploads and processing
+
 ##  Usage
 
-### Web Interface (Recommended)
+### Quick Start (Optimized Commands)
 
-1. **Launch the Streamlit interface**
-   ```bash
-   streamlit run ui/ui_app.py
-   ```
+#### Option 1: One-Click Startup (Recommended)
+```powershell
+# Navigate to project root
+cd F:\EDAI-DOC-AI.v.01\REQUIREMENT-AI.v01
 
-2. **Set input/output**
-   - In the sidebar, set “Input directory” (defaults to `data/docs`).
-   - Click “Run Pipeline”.
-   - Download artifacts: DOCX, Excel, and user stories.
+# Start both backend and frontend automatically
+.\start_all.ps1
+```
 
-### Backend API
+#### Option 2: Manual Startup
+**Terminal 1 - Backend (FastAPI):**
+```powershell
+# Navigate to project root
+cd F:\EDAI-DOC-AI.v.01\REQUIREMENT-AI.v01
 
-1. **Start the FastAPI backend**
-   ```bash
-   uvicorn app.api:app --reload --host 0.0.0.0 --port 8000
-   ```
+# Start backend with script
+.\start_backend.ps1
+```
 
-2. **Call endpoints**
-   - Health:
-     ```bash
-     curl http://localhost:8000/health
-     ```
-   - Process:
-     ```bash
-     curl -X POST http://localhost:8000/process \
-       -H "Content-Type: application/json" \
-       -d '{"input_dir":"data/docs","out_dir":"out","query":"Project requirements","config_path":"config/config.yaml"}'
-     ```
+**Terminal 2 - Frontend (Streamlit):**
+```powershell
+# Navigate to project root
+cd F:\EDAI-DOC-AI.v.01\REQUIREMENT-AI.v01
+
+# Start frontend with script
+.\start_frontend.ps1
+```
+
+#### Option 3: Manual Commands
+```powershell
+# Backend
+.\venv\Scripts\Activate.ps1
+uvicorn app.api:app --reload --host 0.0.0.0 --port 8000
+
+# Frontend (in another terminal)
+.\venv\Scripts\Activate.ps1
+streamlit run ui/ui_app.py
+```
+
+### Access Points
+
+- **Backend API**: http://localhost:8000
+- **Frontend UI**: http://localhost:8501
+- **API Documentation**: http://localhost:8000/docs
+- **Health Check**: http://localhost:8000/health
+- **Analytics**: http://localhost:8000/analytics/summary
+
+### 🚀 New Features Usage
+
+#### Analytics Dashboard
+- View processing statistics and performance metrics
+- Monitor MoSCoW distribution and common requirements
+- Track system health and cached engines
+
+#### Quick Validator
+- Validate requirements text without full processing
+- Get instant feedback on requirement quality
+- Receive improvement suggestions
+
+#### Template Builder
+- Generate standard requirement document outlines
+- Download customizable templates
+- Follow industry best practices
+
+#### Priority Assistant
+- AI-powered MoSCoW prioritization
+- Customizable priority weights
+- Visual priority indicators
 
 ### CLI
 
@@ -151,10 +218,10 @@ python -m app.main --input data/docs --out out --query "Project requirements"
 
 ## 🔌 API Reference
 
-### Endpoints
+### Core Endpoints
 
 #### `GET /health`
-Health check for the backend service.
+Health check for the backend service with performance metrics.
 
 #### `POST /process`
 Run the end-to-end pipeline over a directory of documents.
@@ -169,23 +236,68 @@ Request (JSON):
 }
 ```
 
-Response (JSON excerpt):
+#### `POST /upload-and-process`
+Upload files and process them immediately.
+
+### 🚀 New Advanced Endpoints
+
+#### `GET /analytics/summary`
+Get analytics summary of processed requirements.
 ```json
 {
-  "result": {
-    "files": ["..."],
-    "num_chunks": 123,
-    "num_candidates": 10,
-    "validation": {"flags": [], "missing": []},
-    "output_dir": "out"
-  },
-  "artifacts": {
-    "docx": "out/requirements.docx",
-    "excel": "out/requirements.xlsx",
-    "stories": "out/user_stories.txt"
-  }
+  "total_sessions": 5,
+  "avg_processing_time": "N/A",
+  "most_common_requirements": ["User authentication", "Data validation"],
+  "moscow_distribution": {"must": 45, "should": 30, "could": 20, "wont": 5}
 }
 ```
+
+#### `POST /requirements/validate`
+Validate requirements text without full processing.
+```json
+{
+  "validated_requirements": [
+    {
+      "text": "The system shall authenticate users",
+      "valid": true,
+      "suggestions": []
+    }
+  ]
+}
+```
+
+#### `GET /templates/outline`
+Get standard requirement document outline.
+```json
+{
+  "sections": [
+    "1. INTRODUCTION",
+    "2. PROJECT OVERVIEW",
+    "3. FUNCTIONAL REQUIREMENTS",
+    "..."
+  ],
+  "description": "Standard software requirements document outline"
+}
+```
+
+#### `POST /requirements/prioritize`
+Prioritize requirements using MoSCoW method.
+```json
+{
+  "prioritized_requirements": [
+    {
+      "requirement": "User authentication system",
+      "priority": "must",
+      "score": 4,
+      "rank": 1
+    }
+  ],
+  "criteria_used": {"must": 4, "should": 3, "could": 2, "wont": 1}
+}
+```
+
+#### `POST /clear_cache`
+Clear engine cache for better memory management.
 
 ## Configuration
 
